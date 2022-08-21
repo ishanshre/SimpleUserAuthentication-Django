@@ -131,6 +131,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = "accounts.User"
-LOGIN_REDIRECT_URL = "base:index"
-LOGIN_URL = "accounts:login"
+AUTH_USER_MODEL = "accounts.User"#registering our custom user model
+LOGIN_REDIRECT_URL = "base:index"#redirct if login is successfull
+LOGIN_URL = "accounts:login"#redirect to login page when accessing restricted page
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30 #session cookie will be deleted after 30 days
