@@ -6,9 +6,21 @@
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-item active">
+          <a class="nav-link" href="#">{{ user.username|title }}<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'accounts:logout' %}">Logout<span class="sr-only">(current)</span></a>
+        </li>
+        {% else %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'accounts:login' %}">Login<span class="sr-only">(current)</span></a>
+        </li>
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'accounts:signup' %}">Register<span class="sr-only">(current)</span></a>
         </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
