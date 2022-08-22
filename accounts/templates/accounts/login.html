@@ -8,6 +8,7 @@
         {{ form.as_p }}
         <input type="submit" value="Login" class="btn btn-secondary text-white">
     </form>
-
+    <a href="{% url 'social:begin' 'github' %}" class='text-white'><button class="btn btn-secondary">Login With GitHub</button></a>
+    <a href="{% url 'social:begin' 'google-oauth2' %}" class="text-white"><button class="btn btn-secondary">Login With Google</button></a>
 </div>
 {% endblock body %}

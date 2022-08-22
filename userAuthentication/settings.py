@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'accounts.apps.AccountsConfig',
     'base.apps.BaseConfig',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                #add new lines for social authentication backends
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -103,6 +108,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#Adding authentication backends 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+#Social Auth github config
+SOCIAL_AUTH_GITHUB_KEY = '0e2df58022077e841fa2'
+SOCIAL_AUTH_GITHUB_SECRET = '8c1d9d99afa7457699ea0539172bd05d62d61389'
+
+#Social Auth google config
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '695976197383-2ueq9jqkm3jf81ismrldnocsrgh7qq1o.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
