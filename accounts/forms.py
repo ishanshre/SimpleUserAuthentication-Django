@@ -20,3 +20,13 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = get_user_model()
         fields = ["username","password","remember_me"]
+
+
+class UserContactForm(forms.Form):
+    first_name = forms.CharField(max_length=128, label='',widget=forms.TextInput(attrs={'placeholder':'First Name'}))
+    last_name = forms.CharField(max_length=128, label='', widget=forms.TextInput(attrs={'placeholder':'Last Name'}))
+    phone_number = forms.CharField(max_length=15, required=False, label='', widget=forms.TextInput(attrs={'placeholder':'Phone Number'}))
+    email_address = forms.EmailField(max_length=100, label='', widget=forms.EmailInput(attrs={'placeholder':'Email Address'}))
+    message = forms.CharField(max_length=5000, label='', widget=forms.Textarea(attrs={'placeholer':'Write your message here!'}))
+
+

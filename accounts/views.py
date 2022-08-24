@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm, LoginForm
+from .forms import CustomUserCreationForm, LoginForm, UserContactForm
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, PasswordResetView
+from django.core.mail import send_mail
+from django.views.generic import FormView
 # Create your views here.
 class SignUpView(SuccessMessageMixin, CreateView):
     form_class = CustomUserCreationForm
@@ -45,3 +47,21 @@ class UserPasswordReset(SuccessMessageMixin, PasswordResetView):
     template_name = 'accounts/password_reset.html'
     email_template_name = 'accounts/password_reset_email.html'
     success_url = reverse_lazy("accounts:password_reset_done")
+
+class UserContactView(SuccessMessageMixin, FormView):
+    form_class = UserContactForm
+    template_name = 'accounts/contactus.html'
+    success_url = reverse_lazy('base:index')
+    def form_valid(self, form):
+        send_mail(
+            subject = f"Message from {form.cleaned_data['first_name']} {form.cleaned_data['last_name']}",
+            message = form.cleaned_data['message'],
+            from_email=form.cleaned_data['email_address'],
+            recipient_list=['ishan.shrestha356@gmail.com',]
+        )
+        return super(UserContactView, self).form_valid(form)
+        
+    
+    def get_success_message(self, cleaned_data):
+        print(cleaned_data)
+        return "Message Successfully Sent"
