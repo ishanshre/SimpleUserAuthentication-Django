@@ -3,7 +3,7 @@ from .forms import CustomUserCreationForm, LoginForm
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView
 # Create your views here.
 class SignUpView(SuccessMessageMixin, CreateView):
     form_class = CustomUserCreationForm
@@ -39,3 +39,9 @@ class UserLoginView(SuccessMessageMixin, LoginView):
         if request.user.is_authenticated:
             return redirect('base:index')
         return super(UserLoginView, self).dispatch(request, *args, **kwargs)
+
+
+class UserPasswordReset(SuccessMessageMixin, PasswordResetView):
+    template_name = 'accounts/password_reset.html'
+    email_template_name = 'accounts/password_reset_email.html'
+    success_url = reverse_lazy("accounts:password_reset_done")

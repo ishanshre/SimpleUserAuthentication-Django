@@ -10,5 +10,7 @@
     </form>
     <a href="{% url 'social:begin' 'github' %}" class='text-white'><button class="btn btn-secondary">Login With GitHub</button></a>
     <a href="{% url 'social:begin' 'google-oauth2' %}" class="text-white"><button class="btn btn-secondary">Login With Google</button></a>
+    <br>
+    <a href="{% url 'accounts:password_reset' %}" class="text-white"><button class="btn btn-secondary">Forget Password</button></a>
 </div>
 {% endblock body %}
